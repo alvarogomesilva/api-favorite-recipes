@@ -1,0 +1,71 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Revenue {
+  id_revenue       String @id @default(uuid())
+  title            String
+  description      String
+  ingredients      String
+  preparation_mode String
+  image            String
+
+  category    Category @relation(fields: [id_category], references: [id_category])
+  id_category String
+
+  user       User       @relation(fields: [id_user], references: [id_user])
+  id_user    String
+  created_at DateTime?  @default(now())
+  updated_at DateTime?  @default(now())
+  Favorite   Favorite[]
+
+  @@map("revenues")
+}
+
+model Category {
+  id_category String @id @default(uuid())
+  title       String
+
+  revenue    Revenue[]
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+
+  @@map("categories")
+}
+
+model Favorite {
+  id_favorite String @id @default(uuid())
+
+  id_revenue String
+  revenue    Revenue @relation(fields: [id_revenue], references: [id_revenue])
+
+  id_user String
+  user    User   @relation(fields: [id_user], references: [id_user])
+
+  @@map("favorites")
+}
+
+model User {
+  id_user    String     @id @default(uuid())
+  name       String
+  email      String
+  password   String
+  created_at DateTime?  @default(now())
+  updated_at DateTime?  @default(now())
+  
+  Favorite   Favorite[]
+  revenue    Revenue[]
+
+  @@map("users")
+}
