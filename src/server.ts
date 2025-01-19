@@ -1,11 +1,12 @@
 import express, { json } from 'express';
-import { usersRoutes } from './routes/user-routes';
+import { routes } from './routes/users/user-routes';
 
 const app = express();
 
 app.use(json())
 
-app.use("/api", usersRoutes)
+
+app.use(routes)
 
 const PORT = process.env.PORT || 3000
 
