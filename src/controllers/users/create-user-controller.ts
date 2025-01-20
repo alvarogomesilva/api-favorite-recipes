@@ -14,7 +14,8 @@ export class CreateUserController {
             res.status(201).json(users)
 
         } catch (error: any) {
-            res.status(error.status).json({ 'message-error-400': error.message})
+            res.status(error.status).json({ [`message-error-${error.status}`]: error.message });
+
         }
 
     }

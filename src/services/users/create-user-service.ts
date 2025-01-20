@@ -9,7 +9,13 @@ export class CreateUserService {
         const { name, email, password } = data;
 
         if (!name || !email || !password) {
-            throw new HttpException('Todos os campos são obrigatórios!', 400)
+            throw new HttpException('Todos os campos são obrigatórios', 400)
+        }
+
+        const userAlredyExists = await prisma.user.findFirst({ where: { email } })
+
+        if (userAlredyExists) {
+            throw new HttpException('Usuário já cadastrado', 409)
         }
         
         try {
