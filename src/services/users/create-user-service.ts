@@ -1,18 +1,17 @@
+import { CreateUserDTO } from "../../@types/users/create-user.dto";
 import { prisma } from "../../config/prisma";
+import { HttpException } from "../../validators/HttpException";
 
-interface IUser {
-    name: string;
-    email: string;
-    password: string;
-}
 
 export class CreateUserService {
 
-    async execute({name, email, password}: IUser) {
-        if (!name) return { message: 'nome inválido!' }
-        if (!email) return { message: 'email inválido!' }
-        if (!password) return { message: 'senha inválida!' }
+    async execute(data: CreateUserDTO) {
+        const { name, email, password } = data;
 
+        if (!name || !email || !password) {
+            throw new HttpException('Todos os campos são obrigatórios!', 400)
+        }
+        
         try {
             const users = await prisma.user.create({ 
                 data: { name, email, password },
@@ -20,7 +19,7 @@ export class CreateUserService {
                     id_user: true, 
                     name: true, 
                     email: true, 
-                    password: true, 
+                    password: false, 
                     created_at: true,
                     updated_at: true
                 }
