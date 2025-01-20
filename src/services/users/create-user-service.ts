@@ -1,3 +1,4 @@
+import { hashSync } from "bcryptjs";
 import { CreateUserDTO } from "../../@types/users/create-user.dto";
 import { prisma } from "../../config/prisma";
 import { HttpException } from "../../validators/HttpException";
@@ -17,10 +18,12 @@ export class CreateUserService {
         if (userAlredyExists) {
             throw new HttpException('Usuário já cadastrado', 409)
         }
+
+        const hashPassword = hashSync(password, 10)
         
         try {
             const users = await prisma.user.create({ 
-                data: { name, email, password },
+                data: { name, email, password: hashPassword },
                 select: { 
                     id_user: true, 
                     name: true, 
