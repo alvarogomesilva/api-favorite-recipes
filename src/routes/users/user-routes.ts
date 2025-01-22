@@ -10,4 +10,4 @@ route.post('/users', new CreateUserController().handle)
 route.patch('/users', isAutenticated, new UpdateUserController().handle)
 route.post('/auth', new AuthUserController().handle)
 
-export { route as routes }
+export { route as usersRoutes }
