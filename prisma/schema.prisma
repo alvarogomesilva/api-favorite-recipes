@@ -17,8 +17,8 @@ model Revenue {
   id_revenue       String @id @default(uuid())
   title            String
   description      String
-  ingredients      String
-  preparation_mode String
+  ingredients      String[]
+  preparation_mode String[]
   image            String?
 
   category    Category @relation(fields: [id_category], references: [id_category])
