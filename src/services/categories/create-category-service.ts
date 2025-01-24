@@ -8,6 +8,12 @@ export class CreateCategoryService {
             throw new HttpException('categoria inválida', 400)
         }
 
+        const categoryExists = await prisma.category.findFirst({ where: { title } })
+
+        if(categoryExists) {
+            throw new HttpException('categoria já existe', 409)
+        }
+
         try {
             const categories = await prisma.category.create({ data: { title } })
             return categories;
