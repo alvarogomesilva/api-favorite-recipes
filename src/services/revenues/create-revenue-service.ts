@@ -15,7 +15,15 @@ export class CreateRevenueService {
        
         try {
             const revenues = await prisma.revenue.create({
-                data: { title, id_user, description, id_category, ingredients, preparation_mode }
+                data: { 
+                    title, 
+                    id_user, 
+                    description, 
+                    id_category, 
+                    ingredients, 
+                    preparation_mode,
+                    image
+                }
             })
     
             return revenues
