@@ -5,6 +5,6 @@ import upload from "../../config/multer";
 
 const route = Router()
 
-route.post('/revenue', isAutenticated, upload.single('file'), new CreateRevenueController().handle)
+route.post('/v1/revenues', isAutenticated, upload.single('file'), new CreateRevenueController().handle)
 
 export { route as revenueRoutes }

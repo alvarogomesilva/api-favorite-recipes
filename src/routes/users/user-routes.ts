@@ -6,8 +6,8 @@ import { UpdateUserController } from "../../controllers/users/update-user-contro
 
 const route = Router()
 
-route.post('/users', new CreateUserController().handle)
-route.patch('/users', isAutenticated, new UpdateUserController().handle)
-route.post('/auth', new AuthUserController().handle)
+route.post('/v1/users', new CreateUserController().handle)
+route.patch('/v1/users', isAutenticated, new UpdateUserController().handle)
+route.post('/v1/auth', new AuthUserController().handle)
 
 export { route as usersRoutes }

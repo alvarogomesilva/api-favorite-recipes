@@ -12,8 +12,6 @@ export class CreateRevenueController {
 
         let image: string | undefined;
        
-        if (!req.file) res.json({message: "Arquivo não enviado"})
-
         if (req.file) {
             const extension = req.file.mimetype.substring(6);
             const randomName = Math.floor(Math.random() * 999999999) + Date.now();

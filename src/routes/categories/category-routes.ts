@@ -5,6 +5,6 @@ import { CreateCategoryController } from "../../controllers/categories/create-ca
 
 const route = Router()
 
-route.post('/category', isAutenticated, new CreateCategoryController().handle)
+route.post('/v1/categories', isAutenticated, new CreateCategoryController().handle)
 
 export { route as categoriesRoutes }
