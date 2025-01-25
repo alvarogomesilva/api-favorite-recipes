@@ -9,7 +9,7 @@ const app = express();
 
 app.use(cors())
 app.use(json())
-app.use('/files', static_(resolve(__dirname, '..', 'uploads')))
+app.use('/v1/files', static_(resolve(__dirname, '..', 'uploads')))
 
 app.use(usersRoutes)
 app.use(categoriesRoutes)
