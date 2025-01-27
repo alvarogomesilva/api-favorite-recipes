@@ -1,5 +1,6 @@
 import { CreateRevenueDTO } from "../../@types/revenues/create-revenue.dto";
 import { prisma } from "../../config/prisma";
+import { parseStringInArray } from "../../helpers/parseStringInArray";
 import { HttpException } from "../../validators/HttpException";
 
 export class CreateRevenueService {
@@ -12,7 +13,10 @@ export class CreateRevenueService {
                 Preencha (nome, descrição, categoria, ingredientes e modo de preparo)`, 400)
         }
 
-       
+        const ingredientesList = parseStringInArray(ingredients)
+        const preparationModeList = parseStringInArray(preparation_mode)
+
+
         try {
             const revenues = await prisma.revenue.create({
                 data: { 
@@ -20,8 +24,8 @@ export class CreateRevenueService {
                     id_user, 
                     description, 
                     id_category, 
-                    ingredients, 
-                    preparation_mode,
+                    ingredients: ingredientesList, 
+                    preparation_mode: preparationModeList,
                     image
                 }
             })
