@@ -29,7 +29,7 @@ export class AuthUserService {
                 email: userExists.email
             },
                 process.env.JWT_SECRET as string,
-                { subject: userExists.id_user, expiresIn: 3600 }
+                { subject: userExists.id_user, expiresIn: '1d' }
             )
 
             return {
