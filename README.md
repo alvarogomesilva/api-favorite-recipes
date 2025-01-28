@@ -14,7 +14,6 @@
 
 <h2 id="technologies">💻 Technologies</h2>
 
-- list of all technologies you used
 - NodeJS
 - TypeScript
 - Prisma
@@ -44,9 +43,10 @@ git clone your-project-url-in-github
 Use the `.env.example` as reference to create your configuration file `.env` with your AWS Credentials
 
 ```yaml
-NODE_AWS_REGION=us-east-1
-NODE_AWS_KEY_ID={YOUR_AWS_KEY_ID}
-NODE_AWS_SECRET={YOUR_AWS_SECRET}
+DATABASE_URL=
+PORT=
+JWT_SECRET=
+
 ```
 
 <h3>Starting</h3>
